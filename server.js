@@ -9,22 +9,13 @@ var app = express()
 
 var port = 3000;
 
+var middleware = require('./middleware')
 
-var middleware = {
-    requireAuthentication : function (req,res,next) {
-        console.log("Private route hit...!")
-        next()
-    },
-    logger:function (req,res,next) {
-        console.log("Rquest date: "+new Date().toString()+" ,method: " + req.method +" ,Original URL: " + req.originalUrl)
-        next()
-    }
-}
 
 app.use(middleware.logger)
 
 app.get('/about',middleware.requireAuthentication,function (req,res) {
-    res.send('Hello My name is Penlymeng. I love NEne Jang <3.')
+    res.send('Hello My name is Penlymeng. I love NEne Jang <3. ')
 })
 
 app.use(express.static(__dirname + "/public"))
